@@ -4,7 +4,28 @@
     <title>MyPicsApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+  <nav class="navbar navbar-light bg-light" style="border-bottom: 1px solid black !important;">
+    
+    <% if logged_in? -%> <%= current_user.username%>
+    
+    <form class="form-inline">
+    <a class="btn btn-outline-primary" href="/users/<%= current_user.id %>"> 
+     My Pics
+     </a>
+     <br>
+     <a class="btn btn-outline-primary" href="/pictures"> 
+      Browse All Pictures
+     </a>
+     <br>
+     
+     <%= link_to "Log out", logout_path, method: "post" %>
+     <% else %>
+    <a class="navbar-brand" href="/signup">Create User</a>
+    <% end %>
+    
+    </form>
+ 
+</nav>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>

@@ -1,0 +1,53 @@
+<h1>Welcome to My Pics!</h1>
+
+
+<h3>All Your Pics</h3>
+<%= current_user.pictures.count%>
+<h3>Total Pics</h3>
+<%= Picture.pictures_total%>
+
+<h1>Pictures</h1>
+ 
+<ul>
+<% current_user.pictures.each do |picture| %>
+<li>
+<%= link_to picture_path(picture) do %>
+<%= image_tag(picture.image_url) %>
+<%end%>
+</li>
+<%end%>
+</ul>
+
+<h1>Post New Pic</h1>
+
+<%= form_for (@picture) do |f| %>
+  <%= f.label :image_url, "Image URL"%>
+  <%= f.text_field :image_url %>
+  <br>
+    
+  <%= f.label :title, "Image Title"%>
+  <%= f.text_field :title %>
+
+  <br>
+ <%= f.hidden_field :user_id, value: @user.id%><br>
+ 
+ <%= f.collection_check_boxes :tag_ids, Tag.all, :id, :name %> 
+    
+    <h2>Create a Tag</h2>
+
+ <%= f.fields_for :tags, @picture.tags.build do |tags_fields| %>
+ <%= tags_fields.text_field :name %>
+ <% end %>
+  
+  
+  
+  <%= f.submit %>
+<% end %>
+    
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+<h1>Picture Title: <%= @picture.title %></h1>
+
+            <%= image_tag(@picture.image_url) %>
+
+            <%= @picture.title %>
+            <ul>
+            <% @picture.tags.each do |tag| %>
+                    <li>
+                        
+                        <%= link_to tag.name, tag_path(tag) %>
+                    </li>
+                <% end %>
+                </ul>
+  
